@@ -19,7 +19,7 @@ It showcases a basic e-commerce user interface including product listing, cart f
 ## 📸 Screenshots
 
 ### 🏠 Home Page
-![Home Page](https://github.com/Aayushstha1/React--Final--Project/Home.png)
+![Home Page](https://github.com/Aayushstha1/React--Final--Project/screenshots/Home.png)
 
 ### 🛍️ Product Page
 ![Product Page](https://github.com/Aayushstha1/React--Final--Project/screenshots/products.png)

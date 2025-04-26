@@ -19,15 +19,14 @@ It showcases a basic e-commerce user interface including product listing, cart f
 ## 📸 Screenshots
 
 ### 🏠 Home Page
-![Home Page](https://github.com/your-username/your-repo-name/blob/main/screenshots/home.png)
+![Home Page](https://github.com/Aayushstha1/React--Final--Project/Home.png)
 
 ### 🛍️ Product Page
-![Product Page](https://github.com/your-username/your-repo-name/blob/main/screenshots/products.png)
+![Product Page](https://github.com/Aayushstha1/React--Final--Project/screenshots/products.png)
 
 ### 🛒 Cart Page
-![Cart Page](https://github.com/your-username/your-repo-name/blob/main/screenshots/cart.png)
+![Cart Page](https://github.com/Aayushstha1/React--Final--Project/screenshots/cart.png)
 
-> 📢 **Tip:** Put your screenshots inside a folder named `/screenshots` in your repo.
 
 ---
 

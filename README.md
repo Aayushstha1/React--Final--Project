@@ -48,7 +48,7 @@ It showcases a basic e-commerce user interface including product listing, cart f
 ## 📦 Installation
 
 1. Clone the repository:
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/Aayushstha1/React--Final--Project.git
 
 css
 Copy

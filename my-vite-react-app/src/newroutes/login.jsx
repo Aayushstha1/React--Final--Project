@@ -1,132 +1,108 @@
-// import { useReducer } from "react";
-
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// const reducer = (state, action) => {
-//   if (action.type === "username") {
-//     return { ...state, username: action.payload };
-//   } else {
-//     if (action.hello == "password") {
-//       window.alert("insecure password");
-//       return state;
-//     } else {
-//       return { ...state, password: action.hello };
-//     }
-//   }
-// };
-// const initialState = {
-//   username: "tezz",
-//   password: "dddd",
-// };
-// export default function LoginPage() {
-//   const [formData, dispatch] = useReducer(reducer, initialState);
-//   console.log("-----formData", formData);
-//   return (
-//     <div style={{ width: "100%", textAlign: "center" }}>
-//       <h1>Login Page</h1>
-//       <form>
-//         <div>
-//           <input
-//             type="text"
-//             placeholder="username"
-//             value={formData.username}
-//             onChange={(e) =>
-//               dispatch({ type: "username", payload: e.target.value })
-//             }
-//           />
-//         </div>
-//         <div>
-//           <input
-//             type="password"
-//             placeholder="password"
-//             value={formData.password}
-//             onChange={(e) => dispatch({ hello: e.target.value })}
-//           />
-//         </div>
-//         <button>Login</button>
-//       </form>
-//     </div>
-//   );
-// }
-
-export default function login() {
+export default function Login() {
     const navigate = useNavigate();
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      const username = formData .get("username");
-      const password = formData.get("password");
-      console.log("Username", username);
-      console.log("password", password);
-    
-      const credentials = { username, password};
-      try {
-        const response = await fetch('https://fakestoreapi.com/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(credentials)
-        });
-        const data = await response.json();
-        console.log(data);
-  //   const response = await fetch('https://fakestoreapi.com/auth/login', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify(credentials)
-  // })
-  //   .then(response => response.json())
-  //   .then(data => console.log(data));
-    if(data.token) {
-      localStorage.setItem('token', data.token);
-      navigate("/Products")
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    window.alert("Invalid credentials");
-    throw error;
-  }
-  
-  
-      e.target.reset();
+    const [error, setError] = useState("");
+    const [isSignUp, setIsSignUp] = useState(false);
+
+    // Hardcoded credentials
+    const VALID_CREDENTIALS = {
+        email: "user@example.com",
+        password: "password123"
     };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const email = formData.get("email");
+        const password = formData.get("password");
+
+        // Debug logs
+        console.log('Entered email:', email);
+        console.log('Entered password:', password);
+        console.log('Expected email:', VALID_CREDENTIALS.email);
+        console.log('Expected password:', VALID_CREDENTIALS.password);
+
+        if (!isSignUp) {
+            // Login logic with exact string comparison
+            if (email === VALID_CREDENTIALS.email && password === VALID_CREDENTIALS.password) {
+                console.log('Login successful!');
+                localStorage.setItem('isLoggedIn', 'true');
+                navigate("/dashboard");
+            } else {
+                console.log('Login failed - credentials do not match');
+                setError("Invalid credentials! Please use:");
+            }
+        } else {
+            // Signup logic
+            setError("Account created! Please login.");
+            setIsSignUp(false);
+        }
+    };
+
     return (
-      <div style={{ width: "100%", textAlign: "center" }}>
-        <h1>Login Page</h1>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <input type="text" name="username" placeholder="username" />
-          </div>
-          <div>
-            <input type="password" name="password" placeholder="password" />
-          </div>
-          <button type="">Reset</button><br />
-          <button type="submit">Login</button>
-        </form>
-      </div>
-    );
-  }
-  
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-md w-full space-y-8">
+                <div>
+                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                        {isSignUp ? "Create an account" : "Sign in to your account"}
+                    </h2>
+                    {error && (
+                        <div className="mt-4 text-center text-sm text-red-600">
+                            {error}
+                            <div className="mt-2 p-2 bg-gray-100 rounded">
+                                Email: {VALID_CREDENTIALS.email}<br />
+                                Password: {VALID_CREDENTIALS.password}
+                            </div>
+                        </div>
+                    )}
+                </div>
+                <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+                    <div className="rounded-md shadow-sm -space-y-px">
+                        <div>
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                required
+                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                                placeholder="Email address"
+                            />
+                        </div>
+                        <div>
+                            <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                required
+                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                                placeholder="Password"
+                            />
+                        </div>
+                    </div>
 
-  export const useCheckAuth = (navigateTo = false) => {
-    const navigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const hasToken = localStorage.getItem("token");
-    const handleLogout = () => {
-      localStorage.removeItem("token");
-      setIsLoggedIn(false);
-    };
-    useEffect(() => {
-      if (!hasToken) {
-        if (navigateTo) {
-          navigate("/login");
-        }
-        setIsLoggedIn(false);
-      } else {
-        if (navigateTo) {
-          navigate("/product");
-        }
-        setIsLoggedIn(true);
-      }
-    }, [hasToken, navigate, navigateTo]);
-    return { isLoggedIn, handleLogout };
-  };
-  
+                    <div>
+                        <button
+                            type="submit"
+                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                        >
+                            {isSignUp ? "Sign Up" : "Sign In"}
+                        </button>
+                    </div>
+                </form>
+
+                <div className="text-center">
+                    <button
+                        onClick={() => setIsSignUp(!isSignUp)}
+                        className="text-blue-600 hover:text-blue-800"
+                    >
+                        {isSignUp 
+                            ? "Already have an account? Sign in" 
+                            : "Don't have an account? Sign up"}
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+}

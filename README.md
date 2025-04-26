@@ -22,7 +22,7 @@ It showcases a basic e-commerce user interface including product listing, cart f
 ![Home Page](https://github.com/your-username/your-repo-name/blob/main/screenshots/home.png)
 
 ### 🛍️ Product Page
-![Product Page](https://github.com/your-username/your-repo-name/blob/main/screenshots/product.png)
+![Product Page](https://github.com/your-username/your-repo-name/blob/main/screenshots/products.png)
 
 ### 🛒 Cart Page
 ![Cart Page](https://github.com/your-username/your-repo-name/blob/main/screenshots/cart.png)

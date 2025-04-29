@@ -77,7 +77,7 @@ export function ReviewPage() {
     return (
         <div className="review-page">
             <Link to={"../"}>Go Back</Link>
-            <h2>Product Reviews</h2>
+            <h2>Product Reviews.</h2>
             <p>This is the review page.</p>
         </div>
     );
